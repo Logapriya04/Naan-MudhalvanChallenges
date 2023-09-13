@@ -1,16 +1,32 @@
-# 1.1 Implement a recursive function to calculate the factorial of a given number
-def recur_factorial(n):
-  if n == 1:
-    return n
+#Implement a class called Bank Account that represents a bank account. The class should have private attributes for account number, account holder name, and account balance. Include methods to deposit money, withdraw money, and display the account balance Ensure that the account balance cannot be accessed directly from outside the class. Write a program to create an instance of the BankAccount class and test the deposit and withdrawal functionality.
+class BankAccount:
+ def __init__(self,account_number,account_holder_name,initial_balance=0.0):
+  self.__account_number = account_number
+  self.__account_holder_name = account_holder_name
+  self.__account_balance = initial_balance
+
+ def deposit(self, amount):
+  if amount > 0:
+   self.__account_balance += amount
+   return (f"Deposited ${amount}.New balance:${self.__account_balance}")
   else:
-    return n*recur_factorial(n-1)
-#take input from the user
-num = int(input("Enter a number:"))
-#check if the number is negative
-if num < 0:
-  print("Sorry,factorial does not exists for negative numbers")
-elif num == 0:
-  print("The factorial of 0 is 1")
-else:
-  print("The factorial of",num,"is",recur_factorial(num))
-  
+   return ("Invalid deposit amount. Amount must be greater than 0")
+
+ def withdraw(self, amount):
+  if amount > 0 and amount <=  self.__account_balance:
+   self.__account_balance -= amount
+   return (f"Withdrew ${amount}.New balance:${self.__account_balance}")
+  else:
+   return ("Invalid withdrawal amount or insufficient balance")
+
+ def display_balance(self):
+  return (f"Account Balance for {self.__account_holder_name}:${self.__account_balance}")
+# Creating an instance of BankAccount
+account = BankAccount("1234567890", "John Doe", 1000.0)
+# Testing deposite and withdrawal functionality
+print(account.display_balance())
+print(account.deposit(500))
+print(account.withdraw(200))
+print(account.withdraw(1500))
+#This should result in an error message
+
